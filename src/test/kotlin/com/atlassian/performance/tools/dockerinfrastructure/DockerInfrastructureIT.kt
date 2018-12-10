@@ -1,12 +1,13 @@
-package com.atlassian.performance.tools.dockerinfrastructure.jira
+package com.atlassian.performance.tools.dockerinfrastructure
 
+import com.atlassian.performance.tools.dockerinfrastructure.api.browser.DockerisedChrome
 import com.atlassian.performance.tools.dockerinfrastructure.api.jira.JiraCoreFormula
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.HttpClients
 import org.assertj.core.api.Assertions
 import org.junit.Test
 
-class JiraCoreFormulaTest {
+class DockerInfrastructureIT {
 
     @Test
     fun shouldProvisionJiraCore() {
@@ -15,12 +16,14 @@ class JiraCoreFormulaTest {
             .build()
             .provision()
             .use { jira ->
-                val jiraAddress = jira.getUri()
+                DockerisedChrome().start().use { chrome ->
+                    chrome.driver.navigate() to jira.getDockerUri()
+                }
 
+                val jiraAddress = jira.getUri()
                 val httpclient = HttpClients.createDefault()
                 val get = HttpGet(jiraAddress)
                 val response = httpclient.execute(get)
-
                 Assertions.assertThat(response.statusLine.statusCode).isEqualTo(200)
             }
     }

@@ -2,6 +2,8 @@ package com.atlassian.performance.tools.dockerinfrastructure.api.jira
 
 import com.atlassian.performance.tools.dockerinfrastructure.DockerContainers
 import com.atlassian.performance.tools.dockerinfrastructure.LogWaitStrategy
+import com.atlassian.performance.tools.dockerinfrastructure.Ryuk
+import com.atlassian.performance.tools.dockerinfrastructure.network.SharedNetwork.Companion.DEFAULT_NETWORK_NAME
 import com.atlassian.performance.tools.dockerinfrastructure.jira.DockerisedJira
 import com.atlassian.performance.tools.dockerinfrastructure.jira.JiraContainer
 import org.apache.logging.log4j.LogManager
@@ -16,9 +18,10 @@ class JiraCoreFormula private constructor(
 ) : JiraFormula {
     private val logger: Logger = LogManager.getLogger(this::class.java)
     private val networkAlias = "jira"
-    private val networkName = "jira-core-formula-test-network"
+    private val networkName = DEFAULT_NETWORK_NAME
 
     override fun provision(): Jira {
+        Ryuk.disable()
         DockerContainers().clean(networkName)
         val network = Network.NetworkImpl
             .builder()
@@ -58,7 +61,6 @@ class JiraCoreFormula private constructor(
         return DockerisedJira(
             jiraContainer = jiraContainer,
             network = network,
-            networkName = networkName,
             networkAlias = networkAlias,
             port = port
         )

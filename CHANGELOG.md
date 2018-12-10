@@ -25,4 +25,4 @@ Dropping a requirement of a major version of a dependency is a new contract.
 
 ### Added
 - Jira Core formula.
-- Shared network.
+- Dockerised Chrome browser.
