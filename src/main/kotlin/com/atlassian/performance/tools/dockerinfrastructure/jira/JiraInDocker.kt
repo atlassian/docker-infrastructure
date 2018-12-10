@@ -7,13 +7,9 @@ import java.net.URI
 internal class DockerisedJira(
     private val jiraContainer: JiraContainer,
     private val network: Network,
-    private val networkName: String,
     private val networkAlias: String,
     private val port: Int
 ) : Jira {
-    override fun getNetworkName(): String {
-        return networkName
-    }
 
     override fun getUri(): URI {
         return URI("http://localhost:${jiraContainer.getMappedPort(port)}/")

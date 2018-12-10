@@ -14,12 +14,17 @@ configurations.all {
             when (requested.module.toString()) {
                 "org.slf4j:slf4j-api" -> useVersion("1.8.0-alpha2")
                 "org.jetbrains:annotations" -> useVersion("13.0")
+                "commons-codec:commons-codec" -> useVersion("1.10")
+                "com.google.code.findbugs:jsr305" -> useVersion("1.3.9")
+                "org.apache.httpcomponents:httpclient" -> useVersion("4.5.5")
+                "org.apache.httpcomponents:httpcore" -> useVersion("4.4.9")
             }
         }
     }
 }
 
 dependencies {
+    api("org.seleniumhq.selenium:selenium-support:3.11.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("org.testcontainers:testcontainers:1.9.1")
     implementation("org.testcontainers:selenium:1.9.1")
