@@ -3,9 +3,11 @@ package com.atlassian.performance.tools.dockerinfrastructure.api.jira
 import com.atlassian.performance.tools.dockerinfrastructure.DockerContainers
 import com.atlassian.performance.tools.dockerinfrastructure.LogWaitStrategy
 import com.atlassian.performance.tools.dockerinfrastructure.Ryuk
-import com.atlassian.performance.tools.dockerinfrastructure.network.SharedNetwork.Companion.DEFAULT_NETWORK_NAME
+import com.atlassian.performance.tools.dockerinfrastructure.api.browser.DockerisedChrome
 import com.atlassian.performance.tools.dockerinfrastructure.jira.DockerisedJira
 import com.atlassian.performance.tools.dockerinfrastructure.jira.JiraContainer
+import com.atlassian.performance.tools.dockerinfrastructure.jira.SetUpFromScratchAction
+import com.atlassian.performance.tools.dockerinfrastructure.network.SharedNetwork.Companion.DEFAULT_NETWORK_NAME
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.testcontainers.containers.Network
@@ -58,12 +60,20 @@ class JiraCoreFormula private constructor(
                 LogWaitStrategy("The database is not yet configured")
             )
         jiraContainer.start()
-        return DockerisedJira(
+        val dockerisedJira = DockerisedJira(
             jiraContainer = jiraContainer,
             network = network,
             networkAlias = networkAlias,
             port = port
         )
+        provisionJira(dockerisedJira)
+        return dockerisedJira
+    }
+
+    private fun provisionJira(jira: DockerisedJira) {
+        DockerisedChrome().start().use { chrome ->
+            SetUpFromScratchAction(jira.getDockerUri(), chrome.driver).run()
+        }
     }
 
     class Builder {
