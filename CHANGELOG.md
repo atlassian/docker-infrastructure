@@ -23,6 +23,9 @@ Dropping a requirement of a major version of a dependency is a new contract.
 ## [Unreleased]
 [Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.1.0
 
+## Fixed
+- Stop to use deprecated API.
+
 ## [0.1.0] - 2018-12-13
 [0.1.0]: https://bitbucket.org/atlassian/virtual-users/branches/compare/release-0.1.0%0Dinitial-commit
 

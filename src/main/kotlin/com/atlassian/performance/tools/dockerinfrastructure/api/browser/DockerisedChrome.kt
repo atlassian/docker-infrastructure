@@ -2,7 +2,7 @@ package com.atlassian.performance.tools.dockerinfrastructure.api.browser
 
 import com.atlassian.performance.tools.dockerinfrastructure.Ryuk
 import com.atlassian.performance.tools.dockerinfrastructure.network.SharedNetwork
-import org.openqa.selenium.remote.DesiredCapabilities
+import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.remote.RemoteWebDriver
 import org.testcontainers.containers.BrowserWebDriverContainer
 import org.testcontainers.containers.wait.strategy.HostPortWaitStrategy
@@ -11,7 +11,7 @@ class DockerisedChrome {
 
     fun start(): Browser {
         val container = BrowserWebDriverContainerImpl()
-            .withDesiredCapabilities(DesiredCapabilities.chrome())
+            .withCapabilities(ChromeOptions())
             .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.SKIP, null)
             .waitingFor(HostPortWaitStrategy())
             .withNetwork(SharedNetwork(SharedNetwork.DEFAULT_NETWORK_NAME))

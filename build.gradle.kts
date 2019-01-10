@@ -12,12 +12,9 @@ configurations.all {
         failOnVersionConflict()
         eachDependency {
             when (requested.module.toString()) {
-                "org.slf4j:slf4j-api" -> useVersion("1.8.0-alpha2")
+                "commons-codec:commons-codec" -> useVersion("1.9")
                 "org.jetbrains:annotations" -> useVersion("13.0")
-                "commons-codec:commons-codec" -> useVersion("1.10")
-                "com.google.code.findbugs:jsr305" -> useVersion("1.3.9")
-                "org.apache.httpcomponents:httpclient" -> useVersion("4.5.5")
-                "org.apache.httpcomponents:httpcore" -> useVersion("4.4.9")
+                "org.slf4j:slf4j-api" -> useVersion("1.7.25")
             }
         }
     }
@@ -25,17 +22,18 @@ configurations.all {
 
 dependencies {
     api("org.seleniumhq.selenium:selenium-support:3.11.0")
+    implementation("org.seleniumhq.selenium:selenium-chrome-driver:3.11.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
-    implementation("org.testcontainers:testcontainers:1.9.1")
-    implementation("org.testcontainers:selenium:1.9.1")
+    implementation("org.testcontainers:testcontainers:1.10.5")
+    implementation("org.testcontainers:selenium:1.10.5")
     log4j(
         "api",
         "core",
         "slf4j-impl"
     ).forEach { implementation(it) }
     testCompile("junit:junit:4.12")
-    testCompile("org.apache.httpcomponents:httpclient:4.5.5")
-    testCompile("org.assertj:assertj-core:3.11.0")
+    testCompile("org.apache.httpcomponents:httpclient:4.5.3")
+    testCompile("org.assertj:assertj-core:3.11.1")
 }
 
 fun log4j(
