@@ -21,7 +21,10 @@ Adding a requirement of a major version of a dependency is breaking a contract.
 Dropping a requirement of a major version of a dependency is a new contract.
 
 ## [Unreleased]
-[Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.1.0
+[Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.1.1
+
+## [0.1.1] - 2019-01-10
+[0.1.1]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.1.1%0Drelease-0.1.0
 
 ## Fixed
 - Stop to use deprecated API.
