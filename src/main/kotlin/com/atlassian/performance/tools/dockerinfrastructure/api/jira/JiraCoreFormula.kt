@@ -12,11 +12,12 @@ import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.testcontainers.containers.Network
 import org.testcontainers.images.builder.ImageFromDockerfile
+import java.net.URI
 
 class JiraCoreFormula private constructor(
     private val port: Int,
-    private val version: String
-
+    private val version: String,
+    private val inDockerNetwork: Boolean
 ) : JiraFormula {
     private val logger: Logger = LogManager.getLogger(this::class.java)
     private val networkAlias = "jira"
@@ -63,30 +64,51 @@ class JiraCoreFormula private constructor(
         val dockerisedJira = DockerisedJira(
             jiraContainer = jiraContainer,
             network = network,
-            networkAlias = networkAlias,
-            port = port
+            uri = getJiraUri(jiraContainer)
         )
-        provisionJira(dockerisedJira)
+        provisionJira()
         return dockerisedJira
     }
 
-    private fun provisionJira(jira: DockerisedJira) {
+    private fun getJiraUri(jiraContainer: JiraContainer): URI {
+        return if (inDockerNetwork) {
+            getJiraUriInDockerNetwork()
+        } else {
+            URI("http://localhost:${jiraContainer.getMappedPort(port)}/")
+        }
+    }
+
+    private fun getJiraUriInDockerNetwork() = URI("http://$networkAlias:$port/")
+
+    private fun provisionJira() {
         DockerisedChrome().start().use { chrome ->
-            SetUpFromScratchAction(jira.getDockerUri(), chrome.driver).run()
+            SetUpFromScratchAction(getJiraUriInDockerNetwork(), chrome.driver).run()
         }
     }
 
     class Builder {
         private var port: Int = 8080
         private var version: String = "7.12.3"
+        private var inDockerNetwork = true
 
         fun port(port: Int) = apply { this.port = port }
         fun version(version: String) = apply { this.version = version }
 
+        /**
+         * Determines if the Jira will be accessed from the host machine or another docker via docker network:
+         *  - Use `true` if you're going to access Jira from another docker.
+         *  - Use `false` if you're going to access Jira form the host.
+         *
+         * It's `true` by default.
+         * @since 0.2.0
+         */
+        fun inDockerNetwork(inDockerNetwork: Boolean) = apply { this.inDockerNetwork = inDockerNetwork }
+
         fun build(): JiraFormula {
             return JiraCoreFormula(
                 port = port,
-                version = version
+                version = version,
+                inDockerNetwork = inDockerNetwork
             )
         }
     }

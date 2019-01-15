@@ -4,5 +4,4 @@ import java.net.URI
 
 interface Jira : AutoCloseable {
     fun getUri(): URI
-    fun getDockerUri(): URI
 }

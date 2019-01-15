@@ -10,16 +10,26 @@ import org.junit.Test
 class DockerInfrastructureIT {
 
     @Test
-    fun shouldProvisionJiraCore() {
+    fun shouldDockerisedJiraShouldBeAccessibleFromAnotherDocker() {
         JiraCoreFormula.Builder()
             .version("7.2.12")
             .build()
             .provision()
             .use { jira ->
                 DockerisedChrome().start().use { chrome ->
-                    chrome.driver.navigate() to jira.getDockerUri()
+                    chrome.driver.navigate() to jira.getUri()
                 }
+            }
+    }
 
+    @Test
+    fun shouldDockerisedJiraShouldBeAccessibleFromTheHost() {
+        JiraCoreFormula.Builder()
+            .version("7.2.12")
+            .inDockerNetwork(false)
+            .build()
+            .provision()
+            .use { jira ->
                 val jiraAddress = jira.getUri()
                 val httpclient = HttpClients.createDefault()
                 val get = HttpGet(jiraAddress)
