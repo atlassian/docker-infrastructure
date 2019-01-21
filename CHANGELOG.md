@@ -21,10 +21,10 @@ Adding a requirement of a major version of a dependency is breaking a contract.
 Dropping a requirement of a major version of a dependency is a new contract.
 
 ## [Unreleased]
-[Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.2.0
+[Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.1.2
 
-## [0.2.0] - 2019-01-15
-[0.2.0]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.2.0%0Drelease-0.1.1
+## [0.1.2] - 2019-01-15
+[0.1.2]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.1.2%0Drelease-0.1.1
 
 ### Fixed
 - Provision jira with a default dataset.
