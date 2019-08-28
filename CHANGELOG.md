@@ -23,6 +23,11 @@ Dropping a requirement of a major version of a dependency is a new contract.
 ## [Unreleased]
 [Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.1.2
 
+### Fixed
+- Stop putting the license into the admin user name. Fix [JPERF-561].
+
+[JPERF-561]: https://ecosystem.atlassian.net/browse/JPERF-561
+
 ## [0.1.2] - 2019-01-15
 [0.1.2]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.1.2%0Drelease-0.1.1
 

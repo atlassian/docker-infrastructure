@@ -60,7 +60,7 @@ internal class SetUpFromScratchAction(
         val licenseKeyLocator = By.id("licenseKey")
         driver.wait(Duration.ofMinutes(2), ExpectedConditions.visibilityOfElementLocated(licenseKeyLocator))
         driver.findElement(licenseKeyLocator).sendKeys(timebombLicense)
-        driver.findElement(By.className("aui-button-primary")).sendKeys(timebombLicense)
+        driver.findElement(By.className("aui-button-primary")).click()
     }
 
     private fun setupAdministratorAccount() {
