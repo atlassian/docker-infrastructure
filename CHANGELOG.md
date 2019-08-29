@@ -21,7 +21,10 @@ Adding a requirement of a major version of a dependency is breaking a contract.
 Dropping a requirement of a major version of a dependency is a new contract.
 
 ## [Unreleased]
-[Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.1.2
+[Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.1.3
+
+## [0.1.3] - 2019-08-29
+[0.1.3]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.1.3%0Drelease-0.1.2
 
 ### Fixed
 - Stop putting the license into the admin user name. Fix [JPERF-561].
