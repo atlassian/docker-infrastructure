@@ -4,13 +4,13 @@ import com.atlassian.performance.tools.dockerinfrastructure.api.browser.Dockeris
 import com.atlassian.performance.tools.dockerinfrastructure.api.jira.JiraCoreFormula
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.HttpClients
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class DockerInfrastructureIT {
+class JiraCoreFormulaIT {
 
     @Test
-    fun shouldDockerisedJiraShouldBeAccessibleFromAnotherDocker() {
+    fun shouldBeSeenByAnotherDocker() {
         JiraCoreFormula.Builder()
             .version("7.2.12")
             .build()
@@ -23,7 +23,7 @@ class DockerInfrastructureIT {
     }
 
     @Test
-    fun shouldDockerisedJiraShouldBeAccessibleFromTheHost() {
+    fun shouldBeSeenByTheHost() {
         JiraCoreFormula.Builder()
             .version("7.2.12")
             .inDockerNetwork(false)
@@ -31,10 +31,9 @@ class DockerInfrastructureIT {
             .provision()
             .use { jira ->
                 val jiraAddress = jira.getUri()
-                val httpclient = HttpClients.createDefault()
-                val get = HttpGet(jiraAddress)
-                val response = httpclient.execute(get)
-                Assertions.assertThat(response.statusLine.statusCode).isEqualTo(200)
+                val httpClient = HttpClients.createDefault()
+                val response = httpClient.execute(HttpGet(jiraAddress))
+                assertThat(response.statusLine.statusCode).isEqualTo(200)
             }
     }
 }
