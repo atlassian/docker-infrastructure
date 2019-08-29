@@ -108,8 +108,17 @@ internal class SetUpFromScratchAction(
 
     private fun cleanErrorMessages() {
         driver.wait(Duration.ofMinutes(10), ExpectedConditions.visibilityOfElementLocated(By.className("subnavigator-title")))
-        driver.findElements(By.className("icon-close")).forEach { closeDialogButton ->
-            closeDialogButton.click()
+        val slideOutTime = Duration.ofMillis(1000)
+        for (i in 1..10) {
+            val closeButtons = driver
+                .findElements(By.className("icon-close"))
+                .filter { it.isDisplayed }
+            if (closeButtons.isEmpty()) {
+                break
+            } else {
+                closeButtons.first().click()
+                Thread.sleep(slideOutTime.toMillis() * 2)
+            }
         }
     }
 
