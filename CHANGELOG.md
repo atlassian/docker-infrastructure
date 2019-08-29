@@ -23,6 +23,11 @@ Dropping a requirement of a major version of a dependency is a new contract.
 ## [Unreleased]
 [Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.1.4
 
+### Added
+- Diagnose WebDriver errors during Jira Core setup. Unblock [JPERF-566].
+
+[JPERF-566]: https://ecosystem.atlassian.net/browse/JPERF-566
+
 ## [0.1.4] - 2019-08-29
 [0.1.4]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.1.4%0Drelease-0.1.3
 

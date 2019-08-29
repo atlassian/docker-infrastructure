@@ -7,17 +7,21 @@ import com.atlassian.performance.tools.dockerinfrastructure.api.browser.Dockeris
 import com.atlassian.performance.tools.dockerinfrastructure.jira.DockerisedJira
 import com.atlassian.performance.tools.dockerinfrastructure.jira.JiraContainer
 import com.atlassian.performance.tools.dockerinfrastructure.jira.SetUpFromScratchAction
+import com.atlassian.performance.tools.dockerinfrastructure.lib.WebDriverDiagnostics
 import com.atlassian.performance.tools.dockerinfrastructure.network.SharedNetwork.Companion.DEFAULT_NETWORK_NAME
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.testcontainers.containers.Network
 import org.testcontainers.images.builder.ImageFromDockerfile
 import java.net.URI
+import java.nio.file.Path
+import java.nio.file.Paths
 
 class JiraCoreFormula private constructor(
     private val port: Int,
     private val version: String,
-    private val inDockerNetwork: Boolean
+    private val inDockerNetwork: Boolean,
+    private val diagnoses: Path
 ) : JiraFormula {
     private val logger: Logger = LogManager.getLogger(this::class.java)
     private val networkAlias = "jira"
@@ -82,7 +86,12 @@ class JiraCoreFormula private constructor(
 
     private fun provisionJira() {
         DockerisedChrome().start().use { chrome ->
-            SetUpFromScratchAction(getJiraUriInDockerNetwork(), chrome.driver).run()
+            try {
+                SetUpFromScratchAction(getJiraUriInDockerNetwork(), chrome.driver).run()
+            } catch (e: Exception) {
+                WebDriverDiagnostics(chrome.driver, diagnoses).diagnose(e)
+                throw Exception("Jira setup failed, look for diagnoses in $diagnoses", e)
+            }
         }
     }
 
@@ -90,6 +99,7 @@ class JiraCoreFormula private constructor(
         private var port: Int = 8080
         private var version: String = "7.12.3"
         private var inDockerNetwork = true
+        private var diagnoses: Path = Paths.get("build/diagnoses")
 
         fun port(port: Int) = apply { this.port = port }
         fun version(version: String) = apply { this.version = version }
@@ -104,11 +114,14 @@ class JiraCoreFormula private constructor(
          */
         fun inDockerNetwork(inDockerNetwork: Boolean) = apply { this.inDockerNetwork = inDockerNetwork }
 
+        fun diagnoses(diagnoses: Path) = apply { this.diagnoses = diagnoses }
+
         fun build(): JiraFormula {
             return JiraCoreFormula(
                 port = port,
                 version = version,
-                inDockerNetwork = inDockerNetwork
+                inDockerNetwork = inDockerNetwork,
+                diagnoses = diagnoses
             )
         }
     }

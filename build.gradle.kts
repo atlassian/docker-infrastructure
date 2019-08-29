@@ -1,7 +1,7 @@
-val kotlinVersion = "1.2.70"
+val kotlinVersion = "1.3.20"
 
 plugins {
-    kotlin("jvm").version("1.2.70")
+    kotlin("jvm").version("1.3.20")
     `java-library`
     id("com.atlassian.performance.tools.gradle-release").version("0.4.3")
 }
@@ -22,6 +22,7 @@ configurations.all {
 
 dependencies {
     api("org.seleniumhq.selenium:selenium-support:3.11.0")
+    implementation("com.atlassian.performance.tools:io:[1.0.0,2.0.0)")
     implementation("org.seleniumhq.selenium:selenium-chrome-driver:3.11.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("org.testcontainers:testcontainers:1.10.5")
