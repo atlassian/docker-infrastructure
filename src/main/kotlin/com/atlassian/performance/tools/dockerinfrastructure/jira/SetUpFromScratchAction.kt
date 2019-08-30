@@ -40,7 +40,7 @@ internal class SetUpFromScratchAction(
                     null
                 }
             },
-            timeout = Duration.ofMinutes(9),
+            timeout = Duration.ofMinutes(15),
             precision = Duration.ofSeconds(4)
         )
     }
