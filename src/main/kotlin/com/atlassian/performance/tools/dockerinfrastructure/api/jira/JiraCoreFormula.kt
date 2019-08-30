@@ -59,10 +59,10 @@ class JiraCoreFormula private constructor(
             .withNetworkAliases(networkAlias)
             .withLogConsumer { outputFrame ->
                 val logLine = outputFrame.utf8String.replace(Regex("((\\r?\\n)|(\\r))$"), "")
-                logger.info(logLine)
+                logger.info("Jira: $logLine")
             }
             .waitingFor(
-                LogWaitStrategy("The database is not yet configured")
+                LogWaitStrategy("org.apache.catalina.startup.Catalina.start Server startup in")
             )
         jiraContainer.start()
         val dockerisedJira = DockerisedJira(
