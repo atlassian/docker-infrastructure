@@ -16,6 +16,7 @@ import org.testcontainers.images.builder.ImageFromDockerfile
 import java.net.URI
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.time.Duration
 
 class JiraCoreFormula private constructor(
     private val port: Int,
@@ -62,7 +63,10 @@ class JiraCoreFormula private constructor(
                 logger.info("Jira: $logLine")
             }
             .waitingFor(
-                LogWaitStrategy("org.apache.catalina.startup.Catalina.start Server startup in")
+                LogWaitStrategy(
+                    "org.apache.catalina.startup.Catalina.start Server startup in",
+                    Duration.ofMinutes(8)
+                )
             )
         jiraContainer.start()
         val dockerisedJira = DockerisedJira(
