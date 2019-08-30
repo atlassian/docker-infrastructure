@@ -62,12 +62,6 @@ class JiraCoreFormula private constructor(
                 val logLine = outputFrame.utf8String.replace(Regex("((\\r?\\n)|(\\r))$"), "")
                 logger.info("Jira: $logLine")
             }
-            .waitingFor(
-                LogWaitStrategy(
-                    "org.apache.catalina.startup.Catalina.start Server startup in",
-                    Duration.ofMinutes(8)
-                )
-            )
         jiraContainer.start()
         val dockerisedJira = DockerisedJira(
             jiraContainer = jiraContainer,
