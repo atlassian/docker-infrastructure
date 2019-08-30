@@ -21,7 +21,10 @@ Adding a requirement of a major version of a dependency is breaking a contract.
 Dropping a requirement of a major version of a dependency is a new contract.
 
 ## [Unreleased]
-[Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.1.4
+[Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.2.0
+
+## [0.2.0] - 2019-08-30
+[0.2.0]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.2.0%0Drelease-0.1.4
 
 ### Added
 - Diagnose WebDriver errors during Jira Core setup. Unblock [JPERF-566].
