@@ -17,6 +17,7 @@ internal class SetUpFromScratchAction(
 ) {
 
     internal fun run() {
+        waitForJira()
         chooseSetupMode()
         setupDatabase()
         setupWizard()
@@ -28,8 +29,23 @@ internal class SetUpFromScratchAction(
         createSampleProject()
     }
 
+    private fun waitForJira() {
+        driver.wait(
+            condition = ExpectedCondition {
+                it!!
+                return@ExpectedCondition try {
+                    it.navigate().to(uri.toURL())
+                    it.findElements(By.id("jira")).firstOrNull()
+                } catch (e: Exception) {
+                    null
+                }
+            },
+            timeout = Duration.ofMinutes(9),
+            precision = Duration.ofSeconds(4)
+        )
+    }
+
     private fun chooseSetupMode() {
-        driver.navigate().to(uri.toURL())
         waitAndClick(By.cssSelector("div[data-choice-value='classic']"))
         driver.findElement(By.id("jira-setup-mode-submit")).click()
     }
