@@ -21,10 +21,10 @@ Adding a requirement of a major version of a dependency is breaking a contract.
 Dropping a requirement of a major version of a dependency is a new contract.
 
 ## [Unreleased]
-[Unreleased]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/master%0Drelease-0.2.0
+[Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.2.0...master
 
 ## [0.2.0] - 2019-08-30
-[0.2.0]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.2.0%0Drelease-0.1.4
+[0.2.0]: https://github.com/atlassian/docker-infrastructure/compare/release-0.1.4...release-0.2.0
 
 ### Added
 - Diagnose WebDriver errors during Jira Core setup. Unblock [JPERF-566].
@@ -32,7 +32,7 @@ Dropping a requirement of a major version of a dependency is a new contract.
 [JPERF-566]: https://ecosystem.atlassian.net/browse/JPERF-566
 
 ## [0.1.4] - 2019-08-29
-[0.1.4]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.1.4%0Drelease-0.1.3
+[0.1.4]: https://github.com/atlassian/docker-infrastructure/compare/release-0.1.3...release-0.1.4
 
 ### Fixed
 - Close popups one by one. And wait for them to slide out. Fix [JPERF-565].
@@ -40,7 +40,7 @@ Dropping a requirement of a major version of a dependency is a new contract.
 [JPERF-565]: https://ecosystem.atlassian.net/browse/JPERF-565
 
 ## [0.1.3] - 2019-08-29
-[0.1.3]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.1.3%0Drelease-0.1.2
+[0.1.3]: https://github.com/atlassian/docker-infrastructure/compare/release-0.1.2...release-0.1.3
 
 ### Fixed
 - Stop putting the license into the admin user name. Fix [JPERF-561].
@@ -48,7 +48,7 @@ Dropping a requirement of a major version of a dependency is a new contract.
 [JPERF-561]: https://ecosystem.atlassian.net/browse/JPERF-561
 
 ## [0.1.2] - 2019-01-15
-[0.1.2]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.1.2%0Drelease-0.1.1
+[0.1.2]: https://github.com/atlassian/docker-infrastructure/compare/release-0.1.1...release-0.1.2
 
 ### Fixed
 - Provision jira with a default dataset.
@@ -60,13 +60,13 @@ Dropping a requirement of a major version of a dependency is a new contract.
 - Remove `getDockerUri` method from `Jira` interface.
 
 ## [0.1.1] - 2019-01-10
-[0.1.1]: https://bitbucket.org/atlassian/docker-infrastructure/branches/compare/release-0.1.1%0Drelease-0.1.0
+[0.1.1]: https://github.com/atlassian/docker-infrastructure/compare/release-0.1.0...release-0.1.1
 
 ## Fixed
 - Stop to use deprecated API.
 
 ## [0.1.0] - 2018-12-13
-[0.1.0]: https://bitbucket.org/atlassian/virtual-users/branches/compare/release-0.1.0%0Dinitial-commit
+[0.1.0]: https://github.com/atlassian/docker-infrastructure/compare/initial-commit...release-0.1.0
 
 ### Added
 - Jira Core formula.
