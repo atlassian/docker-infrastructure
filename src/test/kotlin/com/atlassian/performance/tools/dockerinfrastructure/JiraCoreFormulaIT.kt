@@ -6,6 +6,7 @@ import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.HttpClients
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import java.nio.file.Paths
 
 class JiraCoreFormulaIT {
 
@@ -16,9 +17,11 @@ class JiraCoreFormulaIT {
             .build()
             .provision()
             .use { jira ->
-                DockerisedChrome().start().use { chrome ->
-                    chrome.driver.navigate() to jira.getUri()
-                }
+                DockerisedChrome(Paths.get("build/diagnoses/recordings/shouldBeSeenByAnotherDocker"))
+                    .start()
+                    .use { chrome ->
+                        chrome.driver.navigate() to jira.getUri()
+                    }
             }
     }
 
