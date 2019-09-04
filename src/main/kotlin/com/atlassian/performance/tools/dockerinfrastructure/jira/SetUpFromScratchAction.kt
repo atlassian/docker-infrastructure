@@ -86,7 +86,7 @@ internal class SetUpFromScratchAction(
         val passwordLocator = By.cssSelector("input[name='password']")
         val confirmLocator = By.cssSelector("input[name='confirm']")
 
-        driver.wait(Duration.ofMinutes(1), ExpectedConditions.visibilityOfElementLocated(fullnameLocator))
+        driver.wait(Duration.ofMinutes(3), ExpectedConditions.visibilityOfElementLocated(fullnameLocator))
         driver.findElement(fullnameLocator).sendKeys("Admin Fixer")
         driver.findElement(emailLocator).sendKeys("admin@fixer.com")
         driver.findElement(usernameLocator).sendKeys("admin")
