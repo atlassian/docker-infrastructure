@@ -83,7 +83,7 @@ class JiraCoreFormula private constructor(
     private fun getJiraUriInDockerNetwork() = URI("http://$networkAlias:$port/")
 
     private fun provisionJira() {
-        DockerisedChrome().start().use { chrome ->
+        DockerisedChrome(diagnoses.resolve("recordings")).start().use { chrome ->
             try {
                 SetUpFromScratchAction(getJiraUriInDockerNetwork(), chrome.driver).run()
             } catch (e: Exception) {

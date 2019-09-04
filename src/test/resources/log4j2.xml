@@ -18,6 +18,9 @@
         <Logger name="com.atlassian.performance.tools" level="info">
             <AppenderRef ref="Console"/>
         </Logger>
+        <Logger name="org.testcontainers.containers" level="info">
+            <AppenderRef ref="Console"/>
+        </Logger>
         <Root>
             <AppenderRef ref="Nothingness"/>
         </Root>
