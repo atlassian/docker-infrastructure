@@ -1,7 +1,0 @@
-language: java
-stages:
-  - test
-jobs:
-  include:
-    - stage: test
-      script: travis_wait 30 ./gradlew build

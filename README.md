@@ -1,5 +1,7 @@
+[![CircleCI](https://circleci.com/gh/atlassian/docker-infrastructure.svg?style=svg)](https://circleci.com/gh/atlassian/docker-infrastructure)
+
 # JPT infrastructure in docker
-Provision JPT infrastructure in docker.
+Provision JPT infrastructure in Docker.
 
 ## Reporting issues
 
