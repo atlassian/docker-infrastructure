@@ -59,6 +59,9 @@ workflows:
           type: approval
           requires:
             - build1
+            - build2
+            - build3
+            - build4
           filters:
             branches:
               only: master
