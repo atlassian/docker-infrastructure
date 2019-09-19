@@ -10,10 +10,13 @@ import java.nio.file.Paths
 
 class JiraCoreFormulaIT {
 
+    private val jiraVersion = System.getenv("JIRA_CORE_VERSION") ?: "8.0.0"
+
     @Test
     fun shouldBeSeenByAnotherDocker() {
         JiraCoreFormula.Builder()
-            .version("7.2.12")
+            .version(jiraVersion)
+            .inDockerNetwork(true)
             .build()
             .provision()
             .use { jira ->
@@ -28,7 +31,7 @@ class JiraCoreFormulaIT {
     @Test
     fun shouldBeSeenByTheHost() {
         JiraCoreFormula.Builder()
-            .version("7.2.12")
+            .version(jiraVersion)
             .inDockerNetwork(false)
             .build()
             .provision()

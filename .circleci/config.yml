@@ -28,13 +28,21 @@ build_template: &build_template
     - store_test_results:
         path: ./build/test-results
 jobs:
-  build1:
+  jcore_8_0_0:
+    environment:
+      JIRA_CORE_VERSION: 8.0.0
     <<: *build_template
-  build2:
+  jcore_7_13_0:
+    environment:
+      JIRA_CORE_VERSION: 7.13.0
     <<: *build_template
-  build3:
+  jcore_7_3_0:
+    environment:
+      JIRA_CORE_VERSION: 7.3.0
     <<: *build_template
-  build4:
+  jcore_7_2_0:
+    environment:
+      JIRA_CORE_VERSION: 7.2.0
     <<: *build_template
   release:
     docker:
@@ -51,17 +59,17 @@ workflows:
   version: 2
   release_workflow:
     jobs:
-      - build1
-      - build2
-      - build3
-      - build4
+      - jcore_8_0_0
+      - jcore_7_13_0
+      - jcore_7_3_0
+      - jcore_7_2_0
       - approve_release:
           type: approval
           requires:
-            - build1
-            - build2
-            - build3
-            - build4
+            - jcore_8_0_0
+            - jcore_7_13_0
+            - jcore_7_3_0
+            - jcore_7_2_0
           filters:
             branches:
               only: master
