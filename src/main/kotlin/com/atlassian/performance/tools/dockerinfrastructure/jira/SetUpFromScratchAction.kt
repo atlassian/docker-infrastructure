@@ -139,8 +139,8 @@ internal class SetUpFromScratchAction(
     }
 
     private fun waitAndClick(by: By, timeout: Duration = Duration.ofMinutes(5)) {
-        driver.wait(timeout, ExpectedConditions.visibilityOfElementLocated(by))
-        driver.findElement(by).click()
+        driver.wait(timeout, ExpectedConditions.elementToBeClickable(by))
+            .click()
     }
 }
 
