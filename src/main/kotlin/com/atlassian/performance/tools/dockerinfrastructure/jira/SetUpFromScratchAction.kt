@@ -1,12 +1,12 @@
 package com.atlassian.performance.tools.dockerinfrastructure.jira
 
-import org.openqa.selenium.By
-import org.openqa.selenium.WebDriver
+import org.openqa.selenium.*
 import org.openqa.selenium.support.ui.ExpectedCondition
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
 import java.net.URI
 import java.time.Duration
+
 
 /**
  * The class can be adapted to implement `com.atlassian.performance.tools.jiraactions.api.action.Action`.
@@ -47,15 +47,15 @@ internal class SetUpFromScratchAction(
 
     private fun chooseSetupMode() {
         waitAndClick(By.cssSelector("div[data-choice-value='classic']"))
-        driver.findElement(By.id("jira-setup-mode-submit")).click()
+        clickAndAwaitTransition(By.id("jira-setup-mode-submit"))
     }
 
     private fun setupDatabase() {
-        waitAndClick(By.id("jira-setup-database-submit"))
+        clickAndAwaitTransition(By.id("jira-setup-database-submit"))
     }
 
     private fun setupWizard() {
-        waitAndClick(By.id("jira-setupwizard-submit"))
+        clickAndAwaitTransition(By.id("jira-setupwizard-submit"))
     }
 
     /**
@@ -74,9 +74,11 @@ internal class SetUpFromScratchAction(
             hUAhcR3uL05YCxbclq7h1dNa+Nc+j4CFBrdN005oVlMN9yBlWeM4TlnrOhqX02j3"""
             .trimIndent()
         val licenseKeyLocator = By.id("licenseKey")
-        driver.wait(Duration.ofMinutes(2), ExpectedConditions.visibilityOfElementLocated(licenseKeyLocator))
-        driver.findElement(licenseKeyLocator).sendKeys(timebombLicense)
-        driver.findElement(By.className("aui-button-primary")).click()
+        val licenceKeyInput = 
+            driver.wait(Duration.ofMinutes(2), ExpectedConditions.elementToBeClickable(licenseKeyLocator))
+        licenceKeyInput.click()
+        licenceKeyInput.sendKeys(timebombLicense)
+        clickAndAwaitTransition(By.className("aui-button-primary"))
     }
 
     private fun setupAdministratorAccount() {
@@ -96,15 +98,15 @@ internal class SetUpFromScratchAction(
     }
 
     private fun setupEmailNotifications() {
-        waitAndClick(By.id("jira-setupwizard-submit"))
+        clickAndAwaitTransition(By.id("jira-setupwizard-submit"))
     }
 
     private fun setupLanguage() {
-        waitAndClick(By.id("next"))
+        clickAndAwaitTransition(By.id("next"))
     }
 
     private fun setupAvatar() {
-        waitAndClick(By.className("avatar-picker-done"))
+        clickAndAwaitTransition(By.className("avatar-picker-done"))
     }
 
     private fun createSampleProject() {
@@ -128,19 +130,40 @@ internal class SetUpFromScratchAction(
         for (i in 1..10) {
             val closeButtons = driver
                 .findElements(By.className("icon-close"))
-                .filter { it.isDisplayed }
+                .filter { it.isDisplayed && it.isEnabled }
             if (closeButtons.isEmpty()) {
                 break
             } else {
-                closeButtons.first().click()
+                try {
+                    closeButtons.first().click()
+                } catch (e: ElementNotInteractableException) {
+                }
                 Thread.sleep(slideOutTime.toMillis() * 2)
             }
         }
     }
 
     private fun waitAndClick(by: By, timeout: Duration = Duration.ofMinutes(5)) {
-        driver.wait(timeout, ExpectedConditions.visibilityOfElementLocated(by))
-        driver.findElement(by).click()
+        driver.wait(timeout, ExpectedConditions.elementToBeClickable(by))
+            .click()
+    }
+    
+    private fun clickAndAwaitTransition(by: By, timeout: Duration = Duration.ofMinutes(5)) {
+        val clickable = driver.wait(timeout, ExpectedConditions.elementToBeClickable(by))
+        clickable.click()
+        val initialTimeout = Duration.ofSeconds(10)
+        try {
+            driver.wait(initialTimeout, ExpectedConditions.stalenessOf(clickable))
+        } catch (e: Exception) {
+            try {
+                //this both resends the click and executes a staleness check better than stalenessOf
+                clickable.click()
+            } catch (e: StaleElementReferenceException) {
+                // click can happen on a stale element
+                return
+            }
+            driver.wait(timeout, ExpectedConditions.stalenessOf(clickable))
+        }
     }
 }
 
