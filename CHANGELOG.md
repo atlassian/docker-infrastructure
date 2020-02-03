@@ -21,7 +21,16 @@ Adding a requirement of a major version of a dependency is breaking a contract.
 Dropping a requirement of a major version of a dependency is a new contract.
 
 ## [Unreleased]
-[Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.0...master
+[Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.2...master
+
+## [0.3.2] - 2020-02-06
+[0.3.2]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.1...release-0.3.2
+### Fixed
+- Added support for Jira Software
+- updated Testing Containers
+
+## [0.3.1] - 2020-02-03
+[0.3.1]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.0...release-0.3.1
 ### Fixed
 - Upgraded Selenium to 3.141.59
 - A lot of stability fixes
