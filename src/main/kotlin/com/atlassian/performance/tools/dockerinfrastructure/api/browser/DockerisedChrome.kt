@@ -1,6 +1,5 @@
 package com.atlassian.performance.tools.dockerinfrastructure.api.browser
 
-import com.atlassian.performance.tools.dockerinfrastructure.Ryuk
 import com.atlassian.performance.tools.dockerinfrastructure.network.SharedNetwork
 import com.atlassian.performance.tools.io.api.ensureDirectory
 import org.openqa.selenium.chrome.ChromeOptions
@@ -23,7 +22,6 @@ class DockerisedChrome(
             .waitingFor(HostPortWaitStrategy())
             .withNetwork(SharedNetwork(SharedNetwork.DEFAULT_NETWORK_NAME))
             .withExposedPorts(4444)
-        Ryuk.disable()
         container.start()
         return ContainerBrowser(container)
     }
