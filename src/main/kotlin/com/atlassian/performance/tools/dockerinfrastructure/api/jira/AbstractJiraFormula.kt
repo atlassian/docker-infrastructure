@@ -38,7 +38,7 @@ abstract class AbstractJiraFormula internal constructor(
             ImageFromDockerfile()
                 .withDockerfileFromBuilder { builder ->
                     builder
-                        .from("ubuntu:18.10")
+                        .from("ubuntu:20.04")
                         .expose(port)
                         .run("apt-get", "update", "-qq")
                         .run("apt-get", "install", "wget", "openjdk-8-jdk", "-qq")

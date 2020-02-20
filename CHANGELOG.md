@@ -22,6 +22,8 @@ Dropping a requirement of a major version of a dependency is a new contract.
 
 ## [Unreleased]
 [Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.2...master
+### Changed
+- Updated Ubuntu to the 2020 LTS version
 
 ## [0.3.2] - 2020-02-06
 [0.3.2]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.1...release-0.3.2
