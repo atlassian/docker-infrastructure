@@ -5,7 +5,7 @@ val testContainersVersion = "1.12.5"
 plugins {
     kotlin("jvm").version("1.3.20")
     `java-library`
-    id("com.atlassian.performance.tools.gradle-release").version("0.5.0")
+    id("com.atlassian.performance.tools.gradle-release").version("0.7.1")
 }
 
 configurations.all {
