@@ -1,6 +1,7 @@
 val kotlinVersion = "1.3.20"
 val seleniumVersion = "3.141.59"
 val testContainersVersion = "1.12.5"
+val log4jVersion = "2.17.2"
 
 plugins {
     kotlin("jvm").version("1.3.20")
@@ -17,6 +18,9 @@ configurations.all {
                 "commons-codec:commons-codec" -> useVersion("1.9")
                 "org.jetbrains:annotations" -> useVersion("13.0")
                 "org.slf4j:slf4j-api" -> useVersion("1.7.25")
+            }
+            when (requested.group) {
+                "org.apache.logging.log4j" -> useVersion(log4jVersion)
             }
         }
     }
@@ -42,7 +46,7 @@ dependencies {
 fun log4j(
     vararg modules: String
 ): List<String> = modules.map { module ->
-    "org.apache.logging.log4j:log4j-$module:2.10.0"
+    "org.apache.logging.log4j:log4j-$module:$log4jVersion"
 }
 
 tasks.getByName("wrapper", Wrapper::class).apply {
