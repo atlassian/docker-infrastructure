@@ -21,7 +21,10 @@ Adding a requirement of a major version of a dependency is breaking a contract.
 Dropping a requirement of a major version of a dependency is a new contract.
 
 ## [Unreleased]
-[Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.3...master
+[Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.4...master
+
+## [0.3.4] - 2022-04-10
+[0.3.4]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.3...release-0.3.4
 
 ### Fixed
 - Bump log4j dependency to 2.17.2. Fix [JPERF-773]
