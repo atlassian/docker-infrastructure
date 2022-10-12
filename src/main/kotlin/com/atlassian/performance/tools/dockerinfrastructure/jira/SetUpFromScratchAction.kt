@@ -1,6 +1,9 @@
 package com.atlassian.performance.tools.dockerinfrastructure.jira
 
-import org.openqa.selenium.*
+import org.openqa.selenium.By
+import org.openqa.selenium.ElementNotInteractableException
+import org.openqa.selenium.StaleElementReferenceException
+import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.ui.ExpectedCondition
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
@@ -59,22 +62,25 @@ internal class SetUpFromScratchAction(
     }
 
     /**
-     *  Uses "10 user starter non-eval host product license, expires in 3 hours" license
-     *  from https://developer.atlassian.com/platform/marketplace/timebomb-licenses-for-testing-server-apps/.
+     *  Uses "3 hour expiration for all Atlassian host products*" license
+     *  from https://developer.atlassian.com/platform/marketplace/timebomb-licenses-for-testing-server-apps/
      */
     private fun setupLicense() {
         val timebombLicense = """
-            AAABiQ0ODAoPeNp1kk9TwjAQxe/9FJnxXKYpeoCZHqCtgsqfgaIO4yWELURD0tm0KN/eWOjYdvD68
-            vbtb3dzM9GKTBgS2iOU9n3a7/pkHiXE96jvbNhho3XnWXBQBuKtyIVWQTxN4sV8MV7GTirMHk5QO
-            ZJTBsG91eITvPdJBEeQOgN0uNRHwIYtLKWGa1ocNoCzdGUATUA9h2uVdhjPxRGCHAtw5gXyPTMQs
-            RwCn1Lf9XzXv3NqwVN2gGCZDBYWstLj70zgqSyad0fVWPXgJaClGUfB8KGXuG+rl1v3ab0euUOPv
-            jofAlmD/XG8GJBY5YAZCtMa9Ze5MagVZAGKX/FVE4eyMDZtqrdgAq+19zJlWEr/Na0TXjkTx4KLj
-            WzeKbyIjaAJE7aDYpa2tTSO+mvbCrBKo/ryate4Up9KfylnhjumhGEl0SCXzBjB1B9Q/QYhQulrH
-            /fcue6svl1di8BwFFnZKAGTE3mGIalGksliJxTZVqTmvLF6fXxksjhzpkwaqP5s3fMDBMYhRDAtA
-            hUAhcR3uL05YCxbclq7h1dNa+Nc+j4CFBrdN005oVlMN9yBlWeM4TlnrOhqX02j3"""
+AAACLg0ODAoPeNqNVEtv4jAQvudXRNpbpUSEx6FIOQBxW3ZZiCB0V1WllXEG8DbYke3A8u/XdUgVQ
+yg9ZvLN+HuM/e1BUHdGlNvuuEHQ73X73Y4bR4nbbgU9ZwFiD2IchcPH+8T7vXzuej9eXp68YSv45
+UwoASYhOeYwxTsIE7RIxtNHhwh+SP3a33D0XnntuxHsIeM5CIdwtvYxUXQPoRIF6KaC0FUGVlEB3
+v0hOAOWYiH9abFbgZith3i34nwOO65gsAGmZBhUbNC/nIpjhBWEcefJWelzqIDPWz/OtjmXRYv2X
+yqwnwueFkT57x8e4cLmbCD1QnX0UoKQoRc4EUgiaK4oZ2ECUrlZeay75sLNs2JDmZtWR8oPCfWZG
+wHAtjzXgIo0SqmZiKYJmsfz8QI5aI+zApuq6fqJKVPAMCPnNpk4LPW6kBWgkZb+kQAzzzS2g6Dnt
+e69Tqvsr4SOskIqEFOeggz1v4zrHbr0yLJR8rU64FpQpVtBy1mZxM4CnHC9Faf8tKMnTF1AiXORF
+ixyQaWto3RZ+ncWLXtMg6EnKZZRpmQNb2R8tnJXFulCfXmXLry7TrHBWn2HNVyH8WYxj9AzmsxiN
+L/R88Xg6rA1lVs4QpO5titxhplJcCY2mFFZLutAZVhKipm15/VhJx36YVqyN8YP7IaGC1+lwnJ7Q
+5pJpNmxk5hP3qovutY8Pi4E2WIJ59esnr1p+T6eD67teBVCHf+ga+ho4/4D9YItZDAsAhQ5qQ6pA
+SJ+SA7YG9zthbLxRoBBEwIURQr5Zy1B8PonepyLz3UhL7kMVEs=X02q6"""
             .trimIndent()
         val licenseKeyLocator = By.id("licenseKey")
-        val licenceKeyInput = 
+        val licenceKeyInput =
             driver.wait(Duration.ofMinutes(2), ExpectedConditions.elementToBeClickable(licenseKeyLocator))
         licenceKeyInput.click()
         licenceKeyInput.sendKeys(timebombLicense)
@@ -147,7 +153,7 @@ internal class SetUpFromScratchAction(
         driver.wait(timeout, ExpectedConditions.elementToBeClickable(by))
             .click()
     }
-    
+
     private fun clickAndAwaitTransition(by: By, timeout: Duration = Duration.ofMinutes(5)) {
         val clickable = driver.wait(timeout, ExpectedConditions.elementToBeClickable(by))
         clickable.click()

@@ -1,6 +1,6 @@
 val kotlinVersion = "1.3.20"
 val seleniumVersion = "3.141.59"
-val testContainersVersion = "1.12.5"
+val testContainersVersion = "1.17.5"
 val log4jVersion = "2.17.2"
 
 plugins {
@@ -38,7 +38,7 @@ dependencies {
         "core",
         "slf4j-impl"
     ).forEach { implementation(it) }
-    testCompile("junit:junit:4.12")
+    testCompile("junit:junit:4.13.2")
     testCompile("org.apache.httpcomponents:httpclient:4.5.3")
     testCompile("org.assertj:assertj-core:3.11.1")
 }

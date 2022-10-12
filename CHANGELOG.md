@@ -23,6 +23,12 @@ Dropping a requirement of a major version of a dependency is a new contract.
 ## [Unreleased]
 [Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.4...master
 
+### Changed
+- Update Jira license [JPERF-836]
+- Update testcontainers to 1.17.5 as old ryuk image wasn't available in dockerhub anymore
+
+[JPERF-836]: https://ecosystem.atlassian.net/browse/JPERF-836
+
 ## [0.3.4] - 2022-04-10
 [0.3.4]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.3...release-0.3.4
 
