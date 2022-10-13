@@ -21,8 +21,9 @@ Adding a requirement of a major version of a dependency is breaking a contract.
 Dropping a requirement of a major version of a dependency is a new contract.
 
 ## [Unreleased]
-[Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.5...master
+[Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.6...master
 
+## [0.3.6] - 2022-10-13
 ### Fixed
 - Update Jira license to proper one [JPERF-836]
 
