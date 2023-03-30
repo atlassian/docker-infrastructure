@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/atlassian/docker-infrastructure.svg?style=svg)](https://circleci.com/gh/atlassian/docker-infrastructure)
+[![CI](https://github.com/atlassian/docker-infrastructure/actions/workflows/ci.yml/badge.svg)](https://github.com/atlassian/docker-infrastructure/actions/workflows/ci.yml)
 
 # JPT infrastructure in docker
 Provision JPT infrastructure in Docker.
