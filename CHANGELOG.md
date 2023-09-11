@@ -23,6 +23,9 @@ Dropping a requirement of a major version of a dependency is a new contract.
 ## [Unreleased]
 [Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.6...master
 
+### Fixed
+- Use MP4 instead of FLV for video recording for video seek ability [JPERF-836]
+
 ## [0.3.6] - 2022-10-13
 ### Fixed
 - Update Jira license to proper one [JPERF-836]
