@@ -23,26 +23,29 @@ Dropping a requirement of a major version of a dependency is a new contract.
 ## [Unreleased]
 [Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.7...master
 
-## [0.3.7] - 2023-09-11
+## [0.3.7] - 2023-09-12
+[0.3.7]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.6...release-0.3.7
+
 ### Fixed
 - Use MP4 instead of FLV for video recording for video seek ability [JPERF-836]
  
-[0.3.7]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.6...release-0.3.7
 
 ## [0.3.6] - 2022-10-13
+[0.3.6]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.5...release-0.3.6
+
 ### Fixed
 - Update Jira license to proper one [JPERF-836]
 
-[0.3.6]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.5...release-0.3.6
 
 [JPERF-836]: https://ecosystem.atlassian.net/browse/JPERF-836
 
 ## [0.3.5] - 2022-10-13
+[0.3.5]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.4...release-0.3.5
+
 ### Changed
 - Update Jira license [JPERF-836]
 - Update testcontainers to 1.17.5 as old ryuk image wasn't available in dockerhub anymore
 
-[0.3.5]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.4...release-0.3.5
 
 [JPERF-836]: https://ecosystem.atlassian.net/browse/JPERF-836
 
