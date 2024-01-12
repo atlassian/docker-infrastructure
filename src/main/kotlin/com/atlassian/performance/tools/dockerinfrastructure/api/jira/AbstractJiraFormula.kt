@@ -46,7 +46,6 @@ abstract class AbstractJiraFormula internal constructor(
                         .run("tar", "-xzf", "atlassian-jira-$jiraVariant-$version.tar.gz")
                         .run("rm", "/atlassian-jira-$jiraVariant-$version-standalone/bin/check-java.sh")
                         .run("mkdir", "jira-home")
-                        .env("JAVA_HOME", "/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre")
                         .env("JIRA_HOME", "/jira-home")
                         .cmd("/atlassian-jira-$jiraVariant-$version-standalone/bin/start-jira.sh", "-fg")
                         .build()
