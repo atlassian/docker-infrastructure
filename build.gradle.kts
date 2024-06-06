@@ -50,6 +50,6 @@ fun log4j(
 }
 
 tasks.getByName("wrapper", Wrapper::class).apply {
-    gradleVersion = "5.0"
+    gradleVersion = "7.6.3"
     distributionType = Wrapper.DistributionType.ALL
 }
