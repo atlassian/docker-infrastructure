@@ -35,7 +35,6 @@ class DockerisedChrome(
         override val driver: RemoteWebDriver = container.webDriver
 
         override fun close() {
-            driver.quit()
             container.afterTest(
                 object : TestDescription {
                     override fun getFilesystemFriendlyName(): String = UUID.randomUUID().toString()
@@ -43,6 +42,7 @@ class DockerisedChrome(
                 },
                 Optional.empty()
             )
+            driver.quit()
             container.close()
         }
     }
