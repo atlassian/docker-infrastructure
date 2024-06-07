@@ -25,6 +25,7 @@ Dropping a requirement of a major version of a dependency is a new contract.
 
 ### Fixed
 - Fix race condition between screen recording and stopping container.
+- Wait for sample project key to be filled in before clicking submit.
 
 ## [0.3.8] - 2024-01-12
 [0.3.8]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.7...release-0.3.8
