@@ -10,6 +10,9 @@ plugins {
 }
 
 configurations.all {
+    if (name.startsWith("dokka")) {
+        return@all
+    }
     resolutionStrategy {
         activateDependencyLocking()
         failOnVersionConflict()
