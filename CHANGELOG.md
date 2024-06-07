@@ -23,6 +23,9 @@ Dropping a requirement of a major version of a dependency is a new contract.
 ## [Unreleased]
 [Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.8...master
 
+### Fixed
+- Fix race condition between screen recording and stopping container.
+
 ## [0.3.8] - 2024-01-12
 [0.3.8]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.7...release-0.3.8
 
