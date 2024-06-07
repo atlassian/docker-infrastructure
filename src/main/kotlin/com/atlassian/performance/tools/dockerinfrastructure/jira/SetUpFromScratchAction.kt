@@ -118,9 +118,11 @@ faV9ulfLz1K+3g9j1YCFDeq7aYROMQbwMIvHimNt7/bJCCIX02nj"""
         waitAndClick(By.id("sampleData"))
         waitAndClick(By.className("create-project-dialog-create-button"))
 
-        val projectNameInputLocator = By.id("name")
-        driver.wait(Duration.ofMinutes(1), ExpectedConditions.visibilityOfElementLocated(projectNameInputLocator))
+        driver.wait(Duration.ofSeconds(10), ExpectedConditions.visibilityOfElementLocated(By.id("add-project-form")))
+        val projectNameInputLocator = By.cssSelector("[name='name']")
+        driver.wait(Duration.ofMinutes(1), ExpectedConditions.elementToBeClickable(projectNameInputLocator))
         driver.findElement(projectNameInputLocator).sendKeys("Sample")
+        driver.wait(Duration.ofMinutes(1), ExpectedConditions.elementToBeClickable(By.cssSelector("[name='key']")))
 
         val addProjectButtonLocator = By.className("add-project-dialog-create-button")
         driver.wait(Duration.ofMinutes(10), ExpectedConditions.elementToBeClickable(addProjectButtonLocator))
