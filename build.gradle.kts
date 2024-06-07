@@ -31,28 +31,22 @@ configurations.all {
 
 dependencies {
     api("org.seleniumhq.selenium:selenium-support:$seleniumVersion")
-    implementation("com.atlassian.performance.tools:io:[1.0.0,2.0.0)")
+    implementation("com.atlassian.performance.tools:io:[1.0.0, 2.0.0)")
     implementation("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("org.testcontainers:testcontainers:$testContainersVersion")
     implementation("org.testcontainers:selenium:$testContainersVersion")
-    log4j(
+    listOf(
         "api",
         "core",
         "slf4j-impl"
-    ).forEach { implementation(it) }
-    testCompile("junit:junit:4.13.2")
-    testCompile("org.apache.httpcomponents:httpclient:4.5.3")
-    testCompile("org.assertj:assertj-core:3.11.1")
+    ).forEach { implementation("org.apache.logging.log4j:log4j-$it:$log4jVersion") }
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.apache.httpcomponents:httpclient:4.5.3")
+    testImplementation("org.assertj:assertj-core:3.11.1")
 }
 
-fun log4j(
-    vararg modules: String
-): List<String> = modules.map { module ->
-    "org.apache.logging.log4j:log4j-$module:$log4jVersion"
-}
-
-tasks.getByName("wrapper", Wrapper::class).apply {
+tasks.wrapper {
     gradleVersion = "7.6.3"
     distributionType = Wrapper.DistributionType.ALL
 }
