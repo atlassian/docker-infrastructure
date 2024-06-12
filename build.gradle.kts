@@ -4,9 +4,10 @@ val testContainersVersion = "1.17.5"
 val log4jVersion = "2.17.2"
 
 plugins {
+    // gradle-release has to go first, see https://github.com/atlassian-labs/gradle-release/pull/5/commits/0e89b0646d3393e5cf2827240d64bc9bdc2060c1
+    id("com.atlassian.performance.tools.gradle-release").version("0.9.0")
     kotlin("jvm").version("1.3.20")
     `java-library`
-    id("com.atlassian.performance.tools.gradle-release").version("0.9.0")
 }
 
 configurations.all {
