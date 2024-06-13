@@ -21,7 +21,10 @@ Adding a requirement of a major version of a dependency is breaking a contract.
 Dropping a requirement of a major version of a dependency is a new contract.
 
 ## [Unreleased]
-[Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.8...master
+[Unreleased]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.10...master
+
+## [0.3.10] - 2024-06-13
+[0.3.10]: https://github.com/atlassian/docker-infrastructure/compare/release-0.3.8...release-0.3.10
 
 ### Fixed
 - Fix race condition between screen recording and stopping container.
